@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Daisy ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&family=Playfair+Display:italic,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #d63384; /* Deep Pink */
+            --secondary: #f8bbd0; /* Soft Pink */
+            --bg: #fffcfc; 
+            --text: #333;
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            height: 100%; font-family: 'Poppins', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            overflow: hidden;
+        }
+
+        /* Background Decorations */
+        .hearts { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; }
+
+        .page {
+            position: absolute;
+            width: 100%; height: 100%;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        .active { display: flex; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        h1 { font-family: 'Dancing Script', cursive; font-size: 3.5rem; color: var(--primary); margin-bottom: 20px; }
+
+        /* The Letter Box */
+        .letter-container {
+            background: #fff;
+            padding: 40px;
+            border-radius: 2px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            max-width: 600px;
+            border: 1px solid #eee;
+            position: relative;
+        }
+        
+        .letter-container::before {
+            content: '';
+            position: absolute;
+            top: 10px; left: 10px; right: 10px; bottom: 10px;
+            border: 1px solid #fce4ec;
+        }
+
+        .letter-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #555;
+            text-align: left;
+            white-space: pre-wrap; /* Keeps your formatting */
+        }
+
+        /* Photo Grid */
+        .photo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; max-width: 500px; }
+        .photo-grid img { 
+            width: 100%; height: 200px; 
+            object-fit: cover; border: 8px solid white; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transform: rotate(var(--r));
+        }
+
+        /* Navigation */
+        .nav-container { position: fixed; bottom: 40px; display: flex; gap: 20px; }
+        .btn {
+            background: var(--primary); color: white; border: none;
+            padding: 12px 35px; border-radius: 5px; font-weight: 600;
+            cursor: pointer; transition: 0.3s; letter-spacing: 1px;
+        }
+        .btn:hover { background: #ad1457; }
+        .btn:disabled { background: #ddd; cursor: not-allowed; }
+
+        #noBtn { position: absolute; }
+
+        .success-screen {
+            display: none; position: fixed; top: 0; left: 0; 
+            width: 100%; height: 100%; background: white; 
+            z-index: 2000; flex-direction: column; align-items: center; justify-content: center;
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="mySong" loop><source src="song.mp3" type="audio/mpeg"></audio>
+
+    <div class="page active" id="page1">
+        <p style="text-transform: uppercase; letter-spacing: 5px;">A Letter For</p>
+        <h1>Daisy</h1>
+        <p>You might want to turn your volume up... 🎵</p>
+    </div>
+
+    <div class="page" id="page2">
+        <h1>Us Throughout Time</h1>
+        <div class="photo-grid">
+            <img src="1.jpg" style="--r: -2deg" onerror="this.src='https://via.placeholder.com/200?text=Photo+1'">
+            <img src="2.jpg" style="--r: 3deg" onerror="this.src='https://via.placeholder.com/200?text=Photo+2'">
+            <img src="3.jpg" style="--r: -1deg" onerror="this.src='https://via.placeholder.com/200?text=Photo+3'">
+            <img src="4.jpg" style="--r: 2deg" onerror="this.src='https://via.placeholder.com/200?text=Photo+4'">
+        </div>
+    </div>
+
+    <div class="page" id="page3">
+        <div class="letter-container">
+            <h2 style="font-family: 'Dancing Script'; color: var(--primary);">My Dearest Daisy,</h2>
+            <div class="letter-text">
+Hello Daisy 👋👋
+I want to wish you you happy valentines💘
+Maybe in the future this day may be worth looking towards yk.
+For now lets cheerish what we have (haibambi but whatever😭😭)
+</div>
+        </div>
+    </div>
+
+    <div class="page" id="page4">
+        <h1>Why You're Special</h1>
+        <ul style="list-style: none; padding: 0; font-size: 1.3rem; line-height: 2.5;">
+            <li>✨ Your beautiful smile</li>
+            <li>🌸 How you care for everyone</li>
+            <li>💖 The way you make me feel safe</li>
+            <li>🌟 Your infectious energy</li>
+        </ul>
+    </div>
+
+    <div class="page" id="page5">
+        <h1>Will you be my Valentine?</h1>
+        <p>I promise to make it a special day.</p>
+        <div style="margin-top: 50px; position: relative; width: 300px; height: 100px;">
+            <button class="btn" onclick="sayYes()" style="left: 0; position: absolute; z-index: 10;">YES</button>
+            <button id="noBtn" class="btn" style="right: 0; background: #555;">No</button>
+        </div>
+    </div>
+
+    <div class="nav-container">
+        <button id="backBtn" class="btn" onclick="changePage(-1)" disabled>Back</button>
+        <button id="nextBtn" class="btn" onclick="changePage(1)">Next</button>
+    </div>
+
+    <div id="success" class="success-screen">
+        <h1 style="font-size: 4rem;">YES! ❤️</h1>
+        <p style="font-size: 1.5rem; max-width: 500px;">Thank you, Daisy! I love you so much for that. You've made me the happiest person alive (alive maybe nimechachisha but you get the gist😂).</p>
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIycXN3bm80ZXBqZzR3Z3Bicm50ZzR3Z3Bicm50ZzR3Z3Bicm50ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KztT2c4u8mYYUiMKdJ/giphy.gif" width="250">
+    </div>
+
+    <script>
+        let curr = 1;
+        const song = document.getElementById('mySong');
+
+        function changePage(step) {
+            if (curr === 1 && step === 1) song.play();
+            document.getElementById(`page${curr}`).classList.remove('active');
+            curr += step;
+            document.getElementById(`page${curr}`).classList.add('active');
+            
+            document.getElementById('backBtn').disabled = (curr === 1);
+            document.getElementById('nextBtn').style.display = (curr === 5) ? 'none' : 'block';
+        }
+
+        const noBtn = document.getElementById('noBtn');
+        noBtn.addEventListener('mouseover', () => {
+            const x = Math.random() * (window.innerWidth - 120);
+            const y = Math.random() * (window.innerHeight - 50);
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+        });
+
+        function sayYes() {
+            document.getElementById('success').style.display = 'flex';
+        }
+    </script>
+</body>
+</html>
